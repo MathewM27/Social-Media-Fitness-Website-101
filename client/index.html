@@ -1,0 +1,291 @@
+<!-- client/index.html -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <title>FitMedia</title>
+</head>
+
+<body>
+
+    <div id="landing-page" style="display: block;" class="landing-page">
+        <nav>
+            <div class="logo">FitMedia</div>
+            <div class="hamburger" id="hamburger">&#9776;</div>
+            <ul class="nav-links" id="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#testimonial">Testimonial</a></li>
+                <li><a href="#contact">Contact</a></li>
+                <button class="nav-button">SignUp</button>
+            </ul>
+        </nav>
+        <section class="hero">
+            <div class="hero-content">
+                <h3 class="small-title">Grasp Grit and Greatness</h3>
+                <h1 class="big-title">Share the Journey, Share the Experience</h1>
+                <h2 class="fading-text">Motivate the team to greater lengths</h2>
+                <div class="buttons">
+                    <button class="btn-start">Get Started</button>
+                    <button class="btn-who">Who Are We</button>
+                </div>
+            </div>
+            <div class="gallery">
+                <div class="gallery-item">
+                    <img src="./assets/fitGirl.jpg" alt="girldrinkingwater" srcset="">
+                </div>
+                <div class="gallery-item">
+                    <img src="./assets/fit2.jpg" alt="coupleworkingout" srcset="">
+                </div>
+                <div class="gallery-item">
+                    <img src="./assets/fit3.jpg" alt="girl lifting" srcset="">
+                </div>
+                <div class="gallery-item">
+                    <img src="./assets/fit4.jpg" alt="weights" srcset="">
+                </div>
+            </div>
+
+
+        </section>
+        <div id="about" class="about-page">
+            <div>
+                <h1 class="title-about">Walk through the Journey, share the experience</h1>
+                <p class="title-p">Join our community and become a voice, an image of inspiration as you walk with
+                    others
+                    and share motivation. Become an inspiration to the community</p>
+            </div>
+            <div class="images-about">
+                <div class="image-container image-1"><img src="./assets/fit2.jpg" alt="Fitness image 1"></div>
+                <div class="image-container image-2"><img src="./assets/fit3.jpg" alt="Fitness image 2"></div>
+                <div class="image-container image-3"><img src="./assets/fit4.jpg" alt="Fitness image 3"></div>
+                <div class="image-container image-4"><img src="./assets/fitGirl.jpg" alt="Fitness image 4"></div>
+                <div class="image-container image-5"><img src="./assets/fit2.jpg" alt="Fitness image 5"></div>
+            </div>
+
+
+        </div>
+        <div class="testimonial" id="testimonial">
+            <h1>Testimonials</h1>
+            <div class="testimonial-slider">
+                <div class="testimonial-track">
+                    <div class="testimonial-slide">
+                        <div class="testimonial-header">
+                            <img src="./assets/profile1.jpg" alt="User 1" class="profile-photo">
+                            <h3 class="user-name">John Doe</h3>
+                        </div>
+                        <p class="review-text">"FitMedia has transformed my fitness journey. The community support is
+                            incredible,
+                            and I've never felt more motivated!"</p>
+                        <div class="rating">
+                            <span class="star">&#9733;</span>
+                            <span class="star">&#9733;</span>
+                            <span class="star">&#9733;</span>
+                            <span class="star">&#9733;</span>
+                            <span class="star">&#9733;</span>
+                        </div>
+                    </div>
+                    <div class="testimonial-slide">
+                        <div class="testimonial-header">
+                            <img src="./assets/profile2.jpg" alt="User 2" class="profile-photo">
+                            <h3 class="user-name">Jane Smith</h3>
+                        </div>
+                        <p class="review-text">"I love how easy it is to connect with like-minded fitness enthusiasts.
+                            The
+                            progress tracking features are fantastic!"</p>
+                        <div class="rating">
+                            <span class="star">&#9733;</span>
+                            <span class="star">&#9733;</span>
+                            <span class="star">&#9733;</span>
+                            <span class="star">&#9733;</span>
+                            <span class="star">&#9734;</span>
+                        </div>
+                    </div>
+                    <div class="testimonial-slide">
+                        <div class="testimonial-header">
+                            <img src="./assets/profile3.jpg" alt="User 3" class="profile-photo">
+                            <h3 class="user-name">Mike Johnson</h3>
+                        </div>
+                        <p class="review-text">"FitMedia's workout challenges keep me engaged and push me to new limits.
+                            It's been a game-changer for my fitness routine!"</p>
+                        <div class="rating">
+                            <span class="star">&#9733;</span>
+                            <span class="star">&#9733;</span>
+                            <span class="star">&#9733;</span>
+                            <span class="star">&#9733;</span>
+                            <span class="star">&#9733;</span>
+                        </div>
+                    </div>
+                    <!-- Add more testimonial-slide divs for additional testimonials -->
+                </div>
+            </div>
+            <button class="slider-arrow left-arrow">&lt;</button>
+            <button class="slider-arrow right-arrow">&gt;</button>
+        </div>
+
+
+        <div class="container-signup">
+            <div class="auth-image">
+                <img src="./assets/signup.jpg" alt="Welcome Image">
+            </div>
+            <div class="container">
+
+                <form id="signup-form" style="display: block;">
+                    <h1 id="form-title">Create Account</h1>
+                    <div class="input-group">
+                        <div>
+                            <label for="signup-firstname">First Name:</label>
+                            <input type="text" id="signup-firstname" name="firstname" required>
+                        </div>
+                        <div>
+                            <label for="signup-lastname">Last Name:</label>
+                            <input type="text" id="signup-lastname" name="lastname" required>
+                        </div>
+                    </div>
+
+                    <div class="input-group">
+                        <div>
+                            <label for="signup-username">Username:</label>
+                            <input type="text" id="signup-username" name="username" required>
+                        </div>
+                        <div>
+                            <label for="signup-email">Email:</label>
+                            <input type="email" id="signup-email" name="email" required>
+                        </div>
+                    </div>
+
+                    <div class="input-group">
+                        <div>
+                            <label for="signup-telephone">Telephone:</label>
+                            <input type="tel" id="signup-telephone" name="telephone" required>
+                        </div>
+                        <div>
+                            <label for="signup-address">Address:</label>
+                            <input type="text" id="signup-address" name="address" required>
+                        </div>
+                    </div>
+
+                    <div class="input-group">
+                        <div>
+                            <label for="signup-purpose">Purpose of Joining:</label>
+                            <select id="signup-purpose" name="purpose" required>
+                                <option value="influencer">Influencer</option>
+                                <option value="join_workout_team">Join Workout Team</option>
+                                <option value="share_journey">Share Journey</option>
+                                <option value="find_new_workout_mates">Find New Workout Mates</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label for="signup-password">Password:</label>
+                            <input type="password" id="signup-password" name="password" required>
+                        </div>
+                    </div>
+
+                    <button type="submit" id="button-signup">Sign Up</button>
+                    <p>Already have an account? <a href="#" id="show-login">Login here</a></p>
+                </form>
+
+                <form id="login-form" style="display: none;">
+                    <h1 id="form-title">Login</h1>
+                    <div class="input-group" id="login-group">
+                        <div>
+                            <label for="login-email">Email:</label>
+                            <input type="email" id="login-email" name="email" required>
+                        </div>
+                        <div>
+                            <label for="login-password">Password:</label>
+                            <input type="password" id="login-password" name="password" required>
+                        </div>
+                    </div>
+                    <button type="submit" id="button-login">Login</button>
+                    <p>Don't have an account? <a href="#" id="show-signup">Sign up here</a></p>
+                </form>
+            </div>
+        </div>
+
+
+        <div class="footer"
+            style="background-color: #000000; color: white; padding: 20px; border: 2px solid white; border-radius: 10px; display: flex; justify-content: space-between;">
+            <div style="display: flex; flex-direction: column; align-items: flex-start; gap: 4px;">
+                <h2 style="margin: 0;">FitMedia</h2>
+                <p style="margin: 0;">&copy; 2023 FitMedia. All rights reserved.</p>
+            </div>
+            <div style="display: flex; align-items: center;">
+                <a href="#home" style="color: white; margin: 0 10px;">Home</a>
+                <a href="#about" style="color: white; margin: 0 10px;">About</a>
+                <a href="#contact" style="color: white; margin: 0 10px;">Contact</a>
+                <a href="#" style="color: white; margin: 0 5px;"><i class="fab fa-facebook"></i></a>
+                <a href="#" style="color: white; margin: 0 5px;"><i class="fab fa-twitter"></i></a>
+                <a href="#" style="color: white; margin: 0 5px;"><i class="fab fa-instagram"></i></a>
+            </div>
+        </div>
+
+    </div>
+    <div id="social-media-ui" style="display: none;">
+        <nav>
+            <div class="logo">FitMedia</div>
+            <div class="hamburger" id="hamburger">&#9776;</div>
+            <ul class="nav-links" id="nav-links">
+                <li><a href="#home">Feed</a></li>
+                <li><a href="#about">Profile</a></li>
+                <li><a href="#testimonial">Friends</a></li>
+                <li><a href="#contact">Groups</a></li>
+                <button class="nav-button">Logout</button>
+            </ul>
+        </nav>
+        <!-- Social Media Feed Content -->
+        <div class="socialmedia-div">
+            <div class="menu-panel" id="menu-panel">
+
+            </div>
+            <div class="feed-panel" id="feed-panel"></div>
+            <div class="side-panel" id="side-panel"></div>
+        </div>
+    </div>
+
+    <!-- User Profile Modal -->
+    <div id="profile-modal" class="modal" style="display: none;">
+        <div class="modal-content">
+            <span class="close-btn" id="close-profile-modal">&times;</span>
+            <h2>Edit Profile</h2>
+            <form id="profile-form" enctype="multipart/form-data"> <!-- Added enctype -->
+                <label for="profile-picture">Profile Picture</label>
+                <input type="file" id="profile-picture" name="profileImage" accept="image/*" />
+
+                <label for="username">Username</label>
+                <input type="text" id="username" name="profileName" required />
+                <!-- Changed from username to profileName -->
+
+                <label for="bio">Bio</label>
+                <textarea id="bio" name="profileBio" rows="4"></textarea> <!-- Changed from bio to profileBio -->
+
+                <button type="submit">Save Changes</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Post Modal -->
+    <div id="post-modal" class="Postmodal" style="display: none;">
+        <div class="postModal-content">
+            <span class="close-modal" id="close-post-modal">&times;</span>
+            <h2>Create a Post</h2>
+            <form id="post-form">
+                <input type="file" name="media" accept="image/*,video/*" required />
+                <textarea name="caption" placeholder="Add a caption..." required></textarea>
+                <button type="submit">Post</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="./script.js"></script>
+    <script src="menu.js"></script>
+    <script src="post.js"></script>
+    <script src="feed.js"></script>
+    <script src="sidePanel.js"></script>
+    <script src="/server/js/app.js"></script>
+</body>
+
+</html>

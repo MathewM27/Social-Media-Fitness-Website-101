@@ -1,0 +1,118 @@
+
+.post-section {
+	margin-top: 6px;
+}
+.post-item {
+    background-color: #000000;
+    border-radius: 10px;
+    padding: 15px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    margin: 10px; /* Combined margin */
+    width: 512px; /* Set fixed width */
+    height: 400px; /* Set fixed height */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+	overflow-y: scroll;
+}
+
+
+
+.comment-section {
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+}
+
+.comment-input {
+    flex: 1;
+    padding: 5px;
+    margin-top: 5px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+.comment-submit {
+    margin-top: 5px;
+    padding: 5px 10px;
+    background-color: #333333;
+    color: #ffffff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.comment-list {
+    max-height: 100px; /* Set max height for scrollable area */
+    overflow-y: auto; /* Enable scrolling */
+    margin-top: 10px;
+    padding-right: 5px;
+}
+
+.comment-item {
+    margin-bottom: 5px;
+    padding: 5px;
+    color: #ffffff;
+    background-color: #222222;
+    border-radius: 5px;
+}
+
+
+.post-header {
+	display: flex;
+	align-items: center;
+	margin-bottom: 10px;
+}
+
+.avatar {
+	width: 40px;
+	height: 40px;
+	border-radius: 50%;
+	margin-right: 10px;
+}
+
+.user-info {
+	display: flex;
+	flex-direction: column;
+	padding-left: 10px;
+}
+
+.username {
+	font-weight: bold;
+	font-size: medium;
+}
+
+.time-posted {
+	font-size: 12px;
+	color: #888;
+}
+
+.post-caption {
+	margin: 10px 0;
+	font-size: smaller;
+}
+
+/* Set fixed dimensions for post media */
+.post-media {
+	width: 100%; /* Adjust as necessary */
+	height: 200px; /* Set a fixed height */
+	border-radius: 10px;
+	margin-bottom: 10px;
+	object-fit: cover; /* Ensure image covers the area */
+}
+
+.post-actions {
+	display: flex;
+	gap: 10px;
+}
+
+.post-actions button {
+	border: none;
+	background: none;
+	color: #888;
+	cursor: pointer;
+}
+
+.post-actions i {
+	margin-right: 5px;
+}
