@@ -123,21 +123,28 @@ feedPanel.appendChild(statusSection);
 
 
 
+
+
+
 // Create a refresh button
-const refreshButton = document.createElement('button');
+const refreshingButton = document.createElement('button');
 
-refreshButton.classList.add('refresh-button');
+// refreshButton.classList.add('refresh-button');
 
-const refreshIcon = document.createElement('i');
-refreshIcon.classList.add('fas', 'fa-sync'); // Font Awesome refresh icon
+const refreshingIcon = document.createElement('i');
+refreshingIcon.classList.add('fas', 'fa-sync'); // Font Awesome refresh icon
 
 // Append the icon to the button
-refreshButton.appendChild(refreshIcon);
+refreshingButton.appendChild(refreshingIcon);
 // Add event listener to the refresh button
-refreshButton.addEventListener('click', fetchPosts);
 
 // Append the refresh button to the feed panel
-feedPanel.appendChild(refreshButton);
+feedPanel.appendChild(refreshingButton);
+
+
+
+
+
 
 // Create a new post section
 const postSection = document.createElement('div');
@@ -188,9 +195,13 @@ async function fetchPosts() {
 
 // Function to format the time
 function formatTime(time) {
-    const date = new Date(time); // Convert to Date object
-    return date.toLocaleString(); // Format as needed (e.g., 'MM/DD/YYYY, HH:mm')
+    const date = new Date(time);
+    return date.toLocaleString();
 }
+
+
+
+
 
 // Function to append a post to the post section
 function appendPost(post) {
@@ -329,7 +340,6 @@ function appendPost(post) {
 
 
 
-refreshButton.addEventListener('click', fetchPosts);
 
 async function handleLike(postId, likeCountElement) {
     try {
@@ -413,4 +423,4 @@ async function handleComment(postId, text, commentList) {
 }
 
 
-fetchPosts();
+refreshingButton.addEventListener('click', fetchPosts);
