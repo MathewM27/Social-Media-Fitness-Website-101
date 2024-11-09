@@ -447,6 +447,11 @@ nav {
 	height: 500px;
 	background-color: rgb(255, 255, 255);
 	border-radius: 20px;
+	/* Center the button using Flexbox */
+	display: flex;
+    flex-direction: column;
+	justify-content: flex-start; 
+
 }
 .feed-panel {
 	width: 600px;
@@ -545,6 +550,45 @@ select {
 .register {
 	display: none;
 }
+/* Create Post Button Styles */
+.createPost {
+    background-color: #000000;
+    color: #ffffff;
+    font-size: 12px;
+    font-weight: bold;
+    padding: 5px 10px;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: fit-content;
+    max-width: 150px;
+    margin: 8px auto;
+}
+
+/* Add plus icon using CSS */
+.createPost::before {
+    content: '+';
+    font-size: 16px;
+    margin-right: 8px; /* Space between icon and text */
+    color: #ffffff; /* Same color as text */
+}
+
+/* Hover and Active Effects */
+.createPost:hover {
+    background-color: #0056b3;
+    transform: translateY(-2px);
+}
+
+.createPost:active {
+    background-color: #004494;
+    transform: translateY(1px);
+}
+
+
 
 #button-signup {
 	width: 100%;
@@ -706,16 +750,6 @@ select {
 	text-align: center;
 }
 
-.friendsSection {
-	margin-top: 20px;
-	padding-left: 10px;
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	align-items: start;
-	gap: 4px;
-	border-bottom: 2px solid black;
-}
 
 .friendDiv {
 	display: flex;
@@ -1249,133 +1283,386 @@ select {
 }
 
 .refresh-button {
-	background-color: #ffffff; /* Dark purple background */
-	color: rgb(3, 3, 3); /* White text color */
-	border: none; /* No border */
-	border-radius: 5px; /* Slightly rounded corners */
-	padding: 10px 20px; /* Padding for size */
-	font-size: 16px; /* Font size */
-	cursor: pointer; /* Pointer cursor on hover */
-	transition: background-color 0.3s; /* Smooth background color transition */
-	margin: 10px 0; /* Margin for spacing */
+	background-color: #ffffff; 
+	color: rgb(3, 3, 3); 
+	border: none; 
+	border-radius: 5px; 
+	padding: 10px 20px; 
+	font-size: 16px; 
+	cursor: pointer; 
+	transition: background-color 0.3s; 
+	margin: 10px 0; 
 }
 
 .refresh-button:hover {
-	background-color: #8346a2; /* Lighter purple on hover */
+	background-color: #8346a2; 
 }
 
 .refresh-button:focus {
-	outline: none; /* Remove outline on focus */
+	outline: none; 
 }
 
 
 
 .like-button.liked i {
-    color: blue; /* Optional: specifically change icon color if needed */
+    color: blue; 
+	
+}
+.like{
+	padding: 0;
+	margin: 0;
 }
 
 
-/* General styling for friends and people sections */
-.friendsSection, .peopleToFollowSection {
-    margin: 20px 0;
-    padding: 15px;
-    background-color: #f8f9fa;
-    border-radius: 8px;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+/*comment section */
+
+
+/* Comment Section */
+.comment-section {
+    display: none; /* Initially hidden, toggle this with JavaScript */
+    margin-top: 15px;
+    border-top: 1px solid #ddd;
+    padding-top: 10px;
 }
 
-/* Section header styling */
-.friendsSection h2, .peopleToFollowSection h2 {
-    margin: 0;
-    font-size: 1.5em;
-    color: #333;
-    text-align: left;
-    border-bottom: 2px solid #ccc;
-    padding-bottom: 5px;
+.comment-list {
+    max-height: 10px; 
+    overflow-y: auto;
+    padding: 4px;
+    border-top: 1px solid #ddd;
+
+}
+.comment-item {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 4px;
+    background-color: rgb(251, 251, 251);
+    border-radius: 10px;
+    color: black;
+    padding: 10px;
+	height: 20px;
 }
 
-/* Friend/Person container styling */
-.friendDiv {
+.comment-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+.comment-content {
+    background-color: #f1f1f1;
+    border-radius: 10px;
+    padding: 10px;
+    position: relative;
+    max-width: 80%;
+	display: flex;
+	align-items: center;
+	justify-content: start;
+
+}
+
+.comment-username {
+    font-weight: bold;
+    font-size: 14px;
+    color: #063b96;
+    margin-right: 5px;
+	margin-top: 14px;
+	padding-left: 10px;
+	font-style: italic;
+}
+
+
+.comment-text {
+    font-size: 14px;
+    color: #000000;
+	font-weight: bolder;
+    word-wrap: break-word;
+}
+
+
+
+/* Comment Input Area */
+.comment-input-area {
     display: flex;
     align-items: center;
+    padding: 10px 0;
+    border-top: 1px solid #ddd;
+}
+
+.comment-input {
+    flex: 1;
     padding: 10px;
-    margin: 10px 0;
     border: 1px solid #ddd;
-    border-radius: 6px;
-    transition: background-color 0.3s;
-}
-.friendDiv:hover {
-    background-color: #f1f1f1;
+    border-radius: 20px;
+    margin-right: 10px;
+    outline: none;
 }
 
-/* Profile image styling */
-.friendDiv .groupIcon {
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    margin-right: 15px;
-    border: 2px solid #333;
-}
-
-/* Friend/Person name styling */
-.friendDiv h2 {
-    margin: 0;
-    font-size: 1.2em;
-    color: #444;
-    flex-grow: 1;
-}
-
-/* Button styling for follow/unfollow and chat */
-.friendDiv button {
-    margin-left: 10px;
-    padding: 5px 10px;
-    font-size: 0.5em;
-    border-radius: 4px;
+.comment-submit {
+    padding: 10px 15px;
     border: none;
-    cursor: pointer;
-    transition: background-color 0.3s;
-}
-
-.friendDiv button:hover {
-    background-color: #ddd;
-}
-
-.friendDiv button:active {
-    background-color: #bbb;
-}
-
-/* Specific styling for follow/unfollow and chat buttons */
-.friendDiv button:nth-child(3) { /* Unfollow/Follow button */
+    border-radius: 20px;
     background-color: #007bff;
     color: #fff;
+    cursor: pointer;
+    font-weight: bold;
 }
 
-.friendDiv button:nth-child(3):hover {
+.comment-submit:hover {
     background-color: #0056b3;
 }
 
-.friendDiv button:nth-child(4) { /* Chat button */
-    background-color: #28a745;
-    color: #fff;
+
+
+
+/* Styles for People to Follow and Friends Sections */
+.peopleToFollowSection,
+.friendsSection {
+    margin: 2px 4px;
+    padding: 2px 10px 2px 10px;
+    background-color: #ffffff;
+	border: 2px solid black;
+	
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-.friendDiv button:nth-child(4):hover {
-    background-color: #218838;
+.peopleToFollowSection h2,
+.friendsSection h2 {
+    margin-bottom: 4px;
+    font-size: 14px;
+    color: #000000;
 }
 
-/* Refresh button styling */
-.refresh-list {
-    margin: 20px 0;
-    padding: 8px 15px;
-    font-size: 1em;
-    background-color: #ffc107;
-    border: none;
-    border-radius: 5px;
-    color: #333;
-    cursor: pointer;
+.personDiv {
+    display: flex;
+    align-items: center;
+    padding: 6px;
+    margin: 6px 0;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
     transition: background-color 0.3s;
 }
 
-.refresh-list {
-    background-color: #e0a800;
+.personDiv:hover {
+    background-color: #f0f0f0;
+}
+
+.profileImage {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 15px;
+}
+
+.profileName {
+    font-size: 0.8em;
+    color: #333;
+    flex-grow: 1;
+}
+
+.actionButton,
+.messageButton {
+    padding: 5px 12px;
+    margin-left: 4px;
+    font-size: 0.4em;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.actionButton {
+    background-color: #4CAF50;
+    color: white;
+}
+
+.actionButton:hover {
+    background-color: #45a049;
+}
+
+.messageButton {
+    background-color: #007BFF;
+    color: white;
+}
+
+.messageButton:hover {
+    background-color: #0056b3;
+}
+
+.refreshButton {
+    background-color: #000000;
+    color: #ffffff;
+    font-size: 12px;
+    font-weight: bold;
+    padding: 5px 10px;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: fit-content;
+    max-width: 150px;
+    margin: 8px auto;
+}
+
+.refreshButton:hover {
+   background-color: #0056b3;
+	transform: translateY(-2px);  background-color: #e69a00;
+}
+
+.logOutButton{
+	background-color: #000000;
+    color: #ffffff;
+    font-size: 12px;
+    font-weight: bold;
+    padding: 5px 10px;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: fit-content;
+    max-width: 150px;
+    margin: 8px auto;
+}
+.logOutButton:hover {
+   background-color: #0056b3;
+	transform: translateY(-2px);  background-color: #e69a00;
+}
+
+
+.buttonContainer {
+    display: flex;
+    justify-content: space-around;
+    align-items: end;
+    gap: 10px; /* Spacing between buttons */
+    margin-bottom: 4px;
+	margin-top: auto;
+}
+
+
+/* Chat Panel */
+#chat-panel {
+    width: 100%;
+    max-width: 400px;
+    height: 277px;
+    display: flex;
+    flex-direction: column;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    background-color: #ffffff;
+  
+}
+
+/* Chat Header */
+#chat-header {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    background-color: #000000;
+    border-bottom: 1px solid #ddd;
+	height: 15px;
+}
+
+.chat-profile-image {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    margin-right: 10px;
+	
+}
+
+.chat-profile-name {
+    font-size: 11px;
+    font-weight: bold;
+	color: white;
+}
+
+/* Messages Container */
+#messages-container {
+    flex: 1;
+    padding: 8px;
+    overflow-y: scroll;
+    display: flex;
+    flex-direction: column;
+	height: 147px;
+    gap: 4px;
+    background-color: #ffffff;
+}
+
+
+
+/* Sent Message (User's Message) */
+/* Chat message styles */
+.message {
+    margin-bottom: 10px;
+    padding: 10px;
+    border-radius: 5px;
+    max-width: 70%;
+    word-wrap: break-word;
+    font-size: 14px;
+    line-height: 1.5;
+}/* Sent Message (User's Message) */
+.sent {
+    background-color: #50b900; /* Light green */
+    align-self: flex-end; /* Align to the right */
+    text-align: right;
+    color: white;
+    padding: 8px;
+    border-radius: 8px;
+    max-width: 70%;
+}
+
+/* Received Message */
+.received {
+    background-color: #1f201d; /* Dark red */
+    align-self: flex-start; /* Align to the left */
+    text-align: left;
+    color: white;
+    padding: 8px;
+    border-radius: 8px;
+    max-width: 70%;
+}
+
+
+/* Message Input Area */
+.message-input-area {
+    display: flex;
+    padding: 10px;
+    border-top: 1px solid #ddd;
+    background-color: #000000;
+}
+
+#message-input {
+    flex: 1;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 20px;
+    font-size: 14px;
+    outline: none;
+    margin-right: 8px;
+	overflow-y: scroll;
+}
+
+#send-button {
+    padding: 8px 16px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 20px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#send-button:hover {
+    background-color: #0056b3;
 }

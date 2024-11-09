@@ -28,6 +28,46 @@ searchPanel.appendChild(searchContainer);
 
 // Append the search panel to the feed panel
 feedPanel.appendChild(searchPanel);
+// Add event listener for the search input's Enter key
+searchInput.addEventListener('keydown', async (event) => {
+    if (event.key === 'Enter') {
+        const searchTerm = searchInput.value.trim();
+        await fetchPosts(searchTerm);  // Fetch filtered posts based on the search term
+    }
+});
+
+// Add event listener for the search icon click
+searchIcon.addEventListener('click', async () => {
+    const searchTerm = searchInput.value.trim();
+    await fetchPosts(searchTerm);  // Fetch filtered posts based on the search term
+});
+
+// Function to fetch posts with an optional search term
+async function fetchPosts(searchTerm = '') {
+    try {
+        const response = await fetch(`/search/search-posts?search=${encodeURIComponent(searchTerm)}`, {
+            method: 'GET',
+            credentials: 'include'
+        });
+
+        const posts = await response.json();
+        console.log(posts);
+
+        postSection.innerHTML = '';
+
+        if (posts.length === 0) {
+            console.log("No posts found.");
+        } else {
+            posts.reverse();
+            posts.forEach(post => {
+                post.timePosted = formatTime(post.createdAt);
+                appendPost(post);
+            });
+        }
+    } catch (error) {
+        console.error('Error fetching posts:', error);
+    }
+}
 
 // Sample user data (simulating statuses with images)
 const statuses = [
@@ -177,9 +217,7 @@ async function fetchPosts() {
 
             // Loop through fetched posts and create individual post items
             posts.forEach(post => {
-                // // Use profileData for username and avatar if available
-                // post.username = profileData.profileName || 'User Name';
-                // post.avatar = profileData.profileImage || './assets/default-avatar.jpg';
+
 
                 // Ensure post has a timePosted property
                 post.timePosted = formatTime(post.createdAt);
@@ -269,22 +307,8 @@ function appendPost(post) {
     const commentButton = document.createElement('button');
     commentButton.innerHTML = '<i class="fas fa-comment"></i> Comment';
 
-    postActions.appendChild(likeButton);
-    postActions.appendChild(likeCount);
-    postActions.appendChild(dislikeButton);
-    postActions.appendChild(dislikeCount);
-    postActions.appendChild(commentButton);
 
-    // Append all elements to the post item
-    postItem.appendChild(postHeader);
-    postItem.appendChild(postCaption);
-    postItem.appendChild(postMedia);
-    postItem.appendChild(postActions);
 
-    // Append each post item to the post section
-    postSection.appendChild(postItem);
-
-    // Append this in the `appendPost` function after post actions
 
     // Comment section container
     const commentSection = document.createElement('div');
@@ -305,17 +329,55 @@ function appendPost(post) {
     commentSection.appendChild(commentInput);
     commentSection.appendChild(commentSubmit);
 
-    // Container to display comments
     const commentList = document.createElement('div');
     commentList.classList.add('comment-list');
+    commentList.style.maxHeight = '50px';
+    commentList.style.overflowY = 'auto';
 
-    // Populate initial comments if available
+
+    commentButton.addEventListener('click', () => {
+        commentSection.style.display = commentSection.style.display === 'none' ? 'block' : 'none';
+    });
+
+    postActions.appendChild(likeButton);
+    postActions.appendChild(likeCount);
+    postActions.appendChild(dislikeButton);
+    postActions.appendChild(dislikeCount);
+    postActions.appendChild(commentButton);
+
+    // Append all elements to the post item
+    postItem.appendChild(postHeader);
+    postItem.appendChild(postCaption);
+    postItem.appendChild(postMedia);
+    postItem.appendChild(postActions);
+
+    // Append each post item to the post section
+    postSection.appendChild(postItem);
+
+    // Append this in the `appendPost` function after post actions
+
+
     // Populate initial comments if available
     if (post.comments) {
         post.comments.forEach(comment => {
             const commentItem = document.createElement('div');
             commentItem.classList.add('comment-item');
-            commentItem.textContent = `${comment.username}: ${comment.text}`;
+
+            // Username
+            const commentUsername = document.createElement('span');
+            commentUsername.classList.add('comment-username');
+            commentUsername.textContent = comment.username;
+
+            // Text
+            const commentText = document.createElement('p');
+            commentText.classList.add('comment-text');
+            commentText.textContent = comment.text;
+
+            // Append the username and text to the comment item
+            commentItem.appendChild(commentUsername);
+            commentItem.appendChild(commentText);
+
+            // Append comment item to the comment list
             commentList.appendChild(commentItem);
         });
     }

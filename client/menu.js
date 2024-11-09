@@ -7,7 +7,7 @@ let profileData = {
     profileImage: './assets/fitGirl.jpg',
     profileName: 'User Name',
     profileBio: 'Bio here',
-    userId: null // Initialize userId here
+    userId: null
 };
 
 const profileSection = document.createElement('div');
@@ -53,9 +53,9 @@ const loadUserProfile = async () => {
         const data = await response.json();
 
         if (response.ok && data) {
-            profileData.userId = data._id; // Store the userId from the fetched profile
+            profileData.userId = data._id;
             if (!profileData.userId) throw new Error('User ID not found in profile data');
-            // Set profile data from the response
+
             profileData.profileImage = data.profileImage || '';
             profileData.profileName = data.profileName || 'User Name';
             profileData.profileBio = data.profileBio || 'Bio here';
@@ -143,19 +143,6 @@ document.getElementById('profile-form').addEventListener('submit', async (event)
 const postModal = document.getElementById('post-modal');
 const closePostModal = document.getElementById('close-post-modal');
 
-const createPost = document.createElement('button');
-createPost.classList.add('createPost');
-createPost.innerText = 'Create a Post';
-menuPanel.appendChild(createPost);
-
-createPost.addEventListener('click', () => {
-    postModal.style.display = 'block';
-});
-
-// Close post modal
-closePostModal.addEventListener('click', () => {
-    postModal.style.display = 'none';
-});
 
 // Post form submission
 document.getElementById('post-form').addEventListener('submit', async (event) => {
@@ -175,8 +162,6 @@ document.getElementById('post-form').addEventListener('submit', async (event) =>
         if (response.ok) {
             const data = await response.json();
             alert('Post created successfully!');
-            // Optionally, call a function to add the post to the feed dynamically
-            // displayNewPost(data.post);
         } else {
             alert('Failed to create post');
         }
@@ -189,191 +174,161 @@ document.getElementById('post-form').addEventListener('submit', async (event) =>
 
 
 
-// // Friends section
-// const friendsSection = document.createElement('div');
-// friendsSection.classList.add('friendsSection');
-
-// // Sample friend data
-// const friendsData = [
-//     { name: 'Alice Keen', imgSrc: './assets/fit2.jpg', alt: 'Friend Icon 1' },
-//     { name: 'Bella May', imgSrc: './assets/fit3.jpg', alt: 'Friend Icon 2' },
-//     { name: 'Jim Karson', imgSrc: './assets/fit4.jpg', alt: 'Friend Icon 3' },
-//     { name: 'Stacey Queen', imgSrc: './assets/profile1.jpg', alt: 'Friend Icon 4' },
-//     { name: 'Josh Stone', imgSrc: './assets/profile2.jpg', alt: 'Friend Icon 5' },
-//     { name: 'Rebecca Jones', imgSrc: './assets/profile3.jpg', alt: 'Friend Icon 6' }
-// ];
-
-// friendsData.forEach(friend => {
-//     const friendDiv = document.createElement('div');
-//     friendDiv.classList.add('friendDiv');
-
-//     const friendsIcon = document.createElement('img');
-//     friendsIcon.classList.add('groupIcon');
-//     friendsIcon.src = friend.imgSrc;
-//     friendsIcon.alt = friend.alt;
-
-//     const friendsName = document.createElement('h2');
-//     friendsName.classList.add('groupName');
-//     friendsName.innerHTML = friend.name;
-
-//     friendDiv.appendChild(friendsIcon);
-//     friendDiv.appendChild(friendsName);
-//     friendsSection.appendChild(friendDiv);
-// });
-
-// menuPanel.appendChild(friendsSection);
-
-// // Additional buttons
-// const settingButton = document.createElement('button');
-// settingButton.classList.add('settingButton');
-// settingButton.innerText = 'Setting';
-
-// const logOutButton = document.createElement('button');
-// logOutButton.classList.add('logOutButton');
-// logOutButton.innerText = 'Log Out';
-// logOutButton.addEventListener('click', async () => {
-//     document.cookie = "authToken=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/";
-
-//     // Redirect to the home or login page
-//     window.location.href = '/';
-// });
-
-// menuPanel.appendChild(settingButton);
-// menuPanel.appendChild(logOutButton);
 
 
+// client/menu.js
 
-
-
-//FRIENDS
-
-// friends section
+// Friends Section
 const friendsSection = document.createElement('div');
-const peopleToFollowSection = document.createElement('div');
-
-// Set initial content for debugging visibility
-friendsSection.innerHTML = '<h2>Friends</h2><hr><p>Loading friends...</p>';
-friendsSection.style.display = 'block'; // Ensure visible
 friendsSection.classList.add('friendsSection');
-
-peopleToFollowSection.innerHTML = '<h2>People to Follow</h2><hr><p>Loading suggestions...</p>';
-peopleToFollowSection.style.display = 'block'; // Ensure visible
-peopleToFollowSection.classList.add('peopleToFollowSection');
-
-// Append the sections once to the menuPanel
+const friendsTitle = document.createElement('h2');
+friendsTitle.textContent = 'Friends';
+friendsSection.appendChild(friendsTitle);
 menuPanel.appendChild(friendsSection);
+
+
+// People to Follow Section
+const peopleToFollowSection = document.createElement('div');
+peopleToFollowSection.classList.add('peopleToFollowSection');
+const peopleTitle = document.createElement('h2');
+peopleTitle.textContent = 'People to Follow';
+peopleToFollowSection.appendChild(peopleTitle);
 menuPanel.appendChild(peopleToFollowSection);
 
-// Load Friends and People to Follow data from the server
-const loadFriendsAndPeople = async () => {
+
+
+// Fetch and display users in both sections
+async function loadFriendsAndPeople() {
+    peopleToFollowSection.innerHTML = '<h2>People to Follow</h2>';
+    friendsSection.innerHTML = '<h2>Friends</h2>';
+
     try {
-        // Fetch friends
-        const friendsResponse = await fetch('/follow/friends', { credentials: 'include' });
-        if (!friendsResponse.ok) {
-            throw new Error('Failed to load friends');
-        }
-
-        const friends = await friendsResponse.json();
-        console.log('Fetched friends:', friends);
-        renderFriends(friends);
-
-        // Fetch people to follow
-        const peopleResponse = await fetch('/follow/people-to-follow', { credentials: 'include' });
-        if (!peopleResponse.ok) {
-            throw new Error('Failed to load people to follow');
-        }
-
-        const peopleToFollow = await peopleResponse.json();
-        console.log('Fetched people to follow:', peopleToFollow);
-        renderPeopleToFollow(peopleToFollow);
-    } catch (error) {
-        console.error('Error loading friends and people to follow:', error);
-    }
-};
-
-// Render the "Friends" section
-const renderFriends = (friends) => {
-    friendsSection.innerHTML = '<h2>Friends</h2><hr>'; // Clear and add title
-    if (friends.length === 0) {
-        friendsSection.innerHTML += '<p>No friends to display.</p>';
-    }
-    friends.forEach(friend => {
-        const friendDiv = document.createElement('div');
-        friendDiv.classList.add('friendDiv');
-
-        const friendImage = document.createElement('img');
-        friendImage.src = friend.profileImage || './assets/default.jpg';
-        friendImage.alt = 'Friend Image';
-        friendImage.classList.add('groupIcon');
-
-        const friendName = document.createElement('h2');
-        friendName.textContent = friend.profileName;
-
-        const unfollowButton = document.createElement('button');
-        unfollowButton.textContent = 'Unfollow';
-        unfollowButton.addEventListener('click', () => updateFollowStatus(friend._id, 'unfollow'));
-
-        const chatButton = document.createElement('button');
-        chatButton.textContent = 'Chat';
-        // Add chat functionality here in the future
-
-        friendDiv.append(friendImage, friendName, unfollowButton, chatButton);
-        friendsSection.appendChild(friendDiv);
-    });
-};
-
-// Render the "People to Follow" section
-const renderPeopleToFollow = (peopleToFollow) => {
-    peopleToFollowSection.innerHTML = '<h2>People to Follow</h2><hr>'; // Clear and add title
-    if (peopleToFollow.length === 0) {
-        peopleToFollowSection.innerHTML += '<p>No suggestions at the moment.</p>';
-    }
-    peopleToFollow.forEach(person => {
-        const personDiv = document.createElement('div');
-        personDiv.classList.add('friendDiv');
-
-        const personImage = document.createElement('img');
-        personImage.src = person.profileImage || './assets/default.jpg';
-        personImage.alt = 'Profile Image';
-        personImage.classList.add('groupIcon');
-
-        const personName = document.createElement('h2');
-        personName.textContent = person.profileName;
-
-        const followButton = document.createElement('button');
-        followButton.textContent = 'Follow';
-        followButton.addEventListener('click', () => updateFollowStatus(person._id, 'follow'));
-
-        personDiv.append(personImage, personName, followButton);
-        peopleToFollowSection.appendChild(personDiv);
-    });
-};
-
-// Update follow/unfollow status
-const updateFollowStatus = async (userId, action) => {
-    try {
-        const response = await fetch(`/follow/${action}`, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            credentials: 'include',
-            body: JSON.stringify({ friendId: userId })
+        const response = await fetch('/follow/fetch-people', {
+            method: 'GET',
+            credentials: 'include'
         });
-        if (response.ok) {
-            loadFriendsAndPeople(); // Reload friends and people to follow after update
-        } else {
-            console.error('Failed to update follow status');
-        }
+        const { peopleToFollow, friends } = await response.json();
+
+        peopleToFollow.forEach(person => {
+            const personDiv = createPersonDiv(person, 'Follow', handleFollow);
+            peopleToFollowSection.appendChild(personDiv);
+        });
+
+        friends.forEach(friend => {
+            const friendDiv = createPersonDiv(friend, 'Unfollow', handleUnfollow);
+            const messageButton = document.createElement('button');
+            messageButton.classList.add('messageButton');
+            messageButton.textContent = 'Message';
+            messageButton.addEventListener('click', () => openChat(friend));
+            friendDiv.appendChild(messageButton);
+            friendsSection.appendChild(friendDiv);
+        });
     } catch (error) {
-        console.error('Error updating follow status:', error);
+        console.error('Error fetching users:', error);
     }
-};
+}
 
-// Refresh button
+// Create a user/friend card
+function createPersonDiv(person, buttonText, buttonHandler) {
+    const personDiv = document.createElement('div');
+    personDiv.classList.add('personDiv');
+
+    const profileImg = document.createElement('img');
+    profileImg.classList.add('profileImage');
+    profileImg.src = person.profileImage || './assets/default-avatar.jpg';
+    profileImg.alt = `${person.profileName}'s image`;
+
+    const profileName = document.createElement('h3');
+    profileName.classList.add('profileName');
+    profileName.textContent = person.profileName;
+
+    const actionButton = document.createElement('button');
+    actionButton.classList.add('actionButton');
+    actionButton.textContent = buttonText;
+    actionButton.addEventListener('click', () => buttonHandler(person._id));
+
+    personDiv.appendChild(profileImg);
+    personDiv.appendChild(profileName);
+    personDiv.appendChild(actionButton);
+
+    return personDiv;
+}
+
+// Follow and unfollow handlers
+async function handleFollow(userIdToFollow) {
+    await fetch('/follow/follow', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        credentials: 'include',
+        body: JSON.stringify({ userIdToFollow })
+    });
+    loadFriendsAndPeople(); // Refresh the sections
+}
+
+async function handleUnfollow(userIdToUnfollow) {
+    await fetch('/follow/unfollow', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        credentials: 'include',
+        body: JSON.stringify({ userIdToUnfollow })
+    });
+    loadFriendsAndPeople(); // Refresh the sections
+}
+
+// Create a div container for buttons
+const buttonContainer = document.createElement('div');
+buttonContainer.classList.add('buttonContainer');
+
+const createPost = document.createElement('button');
+createPost.classList.add('createPost');
+
+
+// Create text for the button
+const buttonText = document.createElement('span');
+buttonText.innerText = 'Post';
+createPost.appendChild(buttonText);
+
+buttonContainer.appendChild(createPost);
+
+
+createPost.addEventListener('click', () => {
+    postModal.style.display = 'block';
+});
+
+// Close post modal
+closePostModal.addEventListener('click', () => {
+    postModal.style.display = 'none';
+});
+
+
+
+// Initial load and refresh button setup
 const refreshButton = document.createElement('button');
-refreshButton.classList.add('refresh-list');
 refreshButton.textContent = 'Refresh';
+refreshButton.classList.add('refreshButton');
 refreshButton.addEventListener('click', loadFriendsAndPeople);
-menuPanel.appendChild(refreshButton);
+buttonContainer.appendChild(refreshButton);
 
-// Initial load
 loadFriendsAndPeople();
+
+
+
+
+const logOutButton = document.createElement('button');
+logOutButton.classList.add('logOutButton');
+logOutButton.innerText = 'Log Out';
+logOutButton.addEventListener('click', async () => {
+    document.cookie = "authToken=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/";
+
+    // Redirect to the home or login page
+    window.location.href = '/';
+});
+
+
+
+buttonContainer.appendChild(logOutButton);
+menuPanel.appendChild(buttonContainer);
+
+
+
+

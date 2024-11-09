@@ -43,14 +43,13 @@ router.post('/create-post', verifyToken, upload.single('media'), async (req, res
     console.log('Request file:', req.file);
 
     const userId = req.userId;
-    console.log('User ID from token:', userId);
+
 
     try {
         const { caption } = req.body;
         const mediaPath = req.file ? req.file.path : null;
 
-        console.log('Creating post with caption:', caption);
-        console.log('Media path:', mediaPath);
+
 
         // Create the post object
         const newPost = {
@@ -65,7 +64,7 @@ router.post('/create-post', verifyToken, upload.single('media'), async (req, res
 
         // Save post to MongoDB
         const result = await db.collection('post').insertOne(newPost);
-        console.log('Post saved to MongoDB with ID:', result.insertedId);
+
 
         res.status(201).json({ success: true, post: { ...newPost, _id: result.insertedId } });
     } catch (error) {
@@ -73,21 +72,22 @@ router.post('/create-post', verifyToken, upload.single('media'), async (req, res
         res.status(500).json({ success: false, error: 'Failed to create post' });
     }
 });
-
-/// GET endpoint to fetch posts with user information
 router.get('/fetch-posts', async (req, res) => {
-    console.log('Received request to fetch posts');
-
     try {
         // Fetch all posts from the 'post' collection
         const posts = await db.collection('post').find().toArray();
 
         // For each post, get the user's details from the 'fitUsers' collection
-
         const postsWithUserDetails = await Promise.all(posts.map(async (post) => {
-            console.log('Post UserId:', post.userId); // Log the userId from the post
-            const user = await db.collection('fitUsers').findOne({ _id: new ObjectId(post.userId) });
-            console.log('Fetched User:', user); // Log the fetched user details
+            let user;
+            try {
+                // Convert post.userId to ObjectId if it’s a valid string, otherwise use as is
+                const userId = typeof post.userId === 'string' ? new ObjectId(post.userId) : post.userId;
+                user = await db.collection('fitUsers').findOne({ _id: userId });
+            } catch (err) {
+                console.error('Error finding user:', err);
+            }
+
             return {
                 ...post,
                 username: user ? user.profileName : 'Unknown User',
@@ -95,8 +95,6 @@ router.get('/fetch-posts', async (req, res) => {
             };
         }));
 
-
-        console.log('Fetched posts:', postsWithUserDetails.length);
         res.status(200).json(postsWithUserDetails);
     } catch (error) {
         console.error('Error fetching posts:', error);

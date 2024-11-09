@@ -39,7 +39,9 @@ router.post('/signup', async (req, res) => {
             telephone,
             address,
             purpose,
-            password: hashedPassword
+            password: hashedPassword,
+            friends: []
+
         });
 
         res.status(201).json({ message: 'User registered successfully' });

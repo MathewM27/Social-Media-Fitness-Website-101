@@ -1,4 +1,3 @@
-// app.js
 require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
@@ -11,9 +10,12 @@ const uploadProfileRoutes = require('./server/routes/uploadProfile');
 const postUploadRoutes = require('./server/routes/postUpload'); // Import post upload routes
 const likesRoute = require('./server/routes/likes');
 const dislikesRoute = require('./server/routes/dislike');
-const commentsRoute = require('./server/routes/comments')
-const followRoute = require('./server/routes/follow')
+const commentsRoute = require('./server/routes/comments');
+const followRoute = require('./server/routes/follow');
+const messagingRoute = require('./server/routes/message');
+const searchRoute = require('./server/routes/search')
 
+// Middleware setup
 app.use(cors());
 app.use(express.json());
 app.use(cookieParser());
@@ -30,9 +32,11 @@ app.use('/like', likesRoute);
 app.use('/dislike', dislikesRoute);
 app.use('/comments', commentsRoute);
 app.use('/follow', followRoute);
+app.use('/message', messagingRoute);
+app.use('/search', searchRoute);
 
 // Start the server
-const PORT = process.env.PORT || 3000;
+const PORT = 3000;
 app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);
 });

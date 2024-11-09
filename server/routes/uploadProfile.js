@@ -42,7 +42,7 @@ const dbName = 'FitnessSocialMediaApp';
 // Middleware to verify JWT and extract user ID
 function verifyToken(req, res, next) {
     const token = req.cookies.authToken; // Fetch authToken from cookies
-    console.log(`token: ${token}`)
+    
     if (!token) return res.status(403).json({ error: 'Token is required' });
 
     jwt.verify(token, JWT_SECRET, (err, decoded) => {
@@ -57,7 +57,7 @@ function verifyToken(req, res, next) {
 router.post('/update-profile', verifyToken, upload.single('profileImage'), async (req, res) => {
     const { profileName, profileBio } = req.body;
     const userId = req.userId; // User ID from JWT token
-    console.log(`userID: ${userId}`)
+    
     const profileImagePath = req.file ? `/uploads/${req.file.filename}` : null;
 
     try {

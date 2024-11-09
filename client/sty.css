@@ -1,118 +1,221 @@
 
-.post-section {
-	margin-top: 6px;
-}
-.post-item {
-    background-color: #000000;
-    border-radius: 10px;
+/* 
+/* General styling for friends and people sections */
+.friendsSection, .peopleToFollowSection {
+    margin: 2px 0;
     padding: 15px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    margin: 10px; /* Combined margin */
-    width: 512px; /* Set fixed width */
-    height: 400px; /* Set fixed height */
+    background-color: #006dda;
+    border-radius: 8px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Section header styling */
+.friendsSection h2, .peopleToFollowSection h2 {
+    margin: 0;
+    font-size: 1.5em;
+    color: #333;
+    text-align: left;
+    border-bottom: 2px solid #ccc;
+    padding-bottom: 5px;
+}
+
+/* Friend/Person container styling */
+.friendDiv {
     display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-	overflow-y: scroll;
+    align-items: center;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    transition: background-color 0.3s;
+}
+.friendDiv:hover {
+    background-color: #f1f1f1;
 }
 
-
-
-.comment-section {
-    margin-top: 10px;
-    display: flex;
-    flex-direction: column;
+/* Profile image styling */
+.friendDiv .groupIcon {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin-right: 15px;
+    border: 2px solid #333;
 }
 
-.comment-input {
-    flex: 1;
-    padding: 5px;
-    margin-top: 5px;
-    border-radius: 5px;
-    border: 1px solid #ccc;
+/* Friend/Person name styling */
+.friendDiv h2 {
+    margin: 0;
+    font-size: 1.2em;
+    color: #444;
+    flex-grow: 1;
 }
 
-.comment-submit {
-    margin-top: 5px;
+/* Button styling for follow/unfollow and chat */
+.friendDiv button {
+    margin-left: 10px;
     padding: 5px 10px;
-    background-color: #333333;
-    color: #ffffff;
+    font-size: 0.5em;
+    border-radius: 4px;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.friendDiv button:hover {
+    background-color: #ddd;
+}
+
+.friendDiv button:active {
+    background-color: #bbb;
+}
+
+
+.friendDiv button:nth-child(3) { 
+    background-color: #007bff;
+    color: #fff;
+}
+
+.friendDiv button:nth-child(3):hover {
+    background-color: #0056b3;
+}
+
+.friendDiv button:nth-child(4) { 
+    background-color: #28a745;
+    color: #fff;
+}
+
+.friendDiv button:nth-child(4):hover {
+    background-color: #218838;
+}
+
+/* Refresh button styling */
+.refresh-list {
+    margin: 20px 0;
+    padding: 8px 15px;
+    font-size: 1em;
+    background-color: #ffc107;
     border: none;
     border-radius: 5px;
+    color: #333;
     cursor: pointer;
+    transition: background-color 0.3s;
 }
 
-.comment-list {
-    max-height: 100px; /* Set max height for scrollable area */
-    overflow-y: auto; /* Enable scrolling */
-    margin-top: 10px;
-    padding-right: 5px;
-}
-
-.comment-item {
-    margin-bottom: 5px;
-    padding: 5px;
-    color: #ffffff;
-    background-color: #222222;
-    border-radius: 5px;
+.refresh-list {
+    background-color: #e0a800;
 }
 
 
-.post-header {
-	display: flex;
-	align-items: center;
-	margin-bottom: 10px;
+p{
+	color: black
 }
 
-.avatar {
-	width: 40px;
-	height: 40px;
-	border-radius: 50%;
-	margin-right: 10px;
-}
+ */ */
 
-.user-info {
-	display: flex;
-	flex-direction: column;
-	padding-left: 10px;
-}
 
-.username {
-	font-weight: bold;
-	font-size: medium;
-}
 
-.time-posted {
-	font-size: 12px;
-	color: #888;
-}
 
-.post-caption {
-	margin: 10px 0;
-	font-size: smaller;
-}
 
-/* Set fixed dimensions for post media */
-.post-media {
-	width: 100%; /* Adjust as necessary */
-	height: 200px; /* Set a fixed height */
-	border-radius: 10px;
-	margin-bottom: 10px;
-	object-fit: cover; /* Ensure image covers the area */
-}
 
-.post-actions {
-	display: flex;
-	gap: 10px;
-}
 
-.post-actions button {
-	border: none;
-	background: none;
-	color: #888;
-	cursor: pointer;
-}
 
-.post-actions i {
-	margin-right: 5px;
-}
+
+
+
+
+
+
+
+
+ // // follow.js
+// const express = require('express');
+// const { MongoClient, ObjectId } = require('mongodb');
+// const jwt = require('jsonwebtoken');
+// const cookieParser = require('cookie-parser');
+
+
+// const router = express.Router();
+// router.use(cookieParser());  // Use cookie-parser middleware
+
+// const JWT_SECRET = 'your_jwt_secret';
+
+
+
+// const mongoURL = 'mongodb+srv://mathews:Rihanna6927@cluster0.16sij.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0';
+// const dbName = 'FitnessSocialMediaApp';
+
+
+// // Middleware to verify JWT and extract user ID
+// function verifyToken(req, res, next) {
+//     const token = req.cookies.authToken;
+//     if (!token) return res.status(403).json({ error: 'Token is required' });
+
+//     jwt.verify(token, JWT_SECRET, (err, decoded) => {
+//         if (err) return res.status(401).json({ error: 'Unauthorized' });
+//         req.userId = decoded.UserId;
+//         next();
+//     });
+// }
+
+// // Fetch current user's friends
+// router.get('/friends', verifyToken, async (req, res) => {
+//     const userId = req.userId;
+//     try {
+//         const db = await connectToDb();  // Get the connected DB
+//         const user = await db.collection('fitUsers').findOne({ _id: ObjectId(userId) });
+//         const friends = await db.collection('fitUsers').find({ _id: { $in: user.friends || [] } }).toArray();
+//         res.json(friends);
+//     } catch (error) {
+//         res.status(500).json({ error: 'Error fetching friends list' });
+//     }
+// });
+
+// // Fetch other users for "People to Follow" section
+// // Fetch other users for "People to Follow" section
+// router.get('/people-to-follow', verifyToken, async (req, res) => {
+//     const userId = req.userId;
+//     try {
+//         const db = await connectToDb(); // Get the connected DB
+//         const peopleToFollow = await db.collection('fitUsers').find({
+//             _id: { $ne: ObjectId(userId) } // Exclude only the logged-in user
+//         }).toArray();
+//         res.json(peopleToFollow);
+//     } catch (error) {
+//         res.status(500).json({ error: 'Error fetching people to follow' });
+//     }
+// });
+
+
+// // Follow a user
+// router.post('/follow', verifyToken, async (req, res) => {
+//     const { friendId } = req.body;
+//     const userId = req.userId;
+//     try {
+//         const db = await connectToDb();  // Get the connected DB
+//         await db.collection('fitUsers').updateOne(
+//             { _id: ObjectId(userId) },
+//             { $addToSet: { friends: ObjectId(friendId) } }
+//         );
+//         res.json({ success: true });
+//     } catch (error) {
+//         res.status(500).json({ error: 'Error following user' });
+//     }
+// });
+
+// // Unfollow a user
+// router.post('/unfollow', verifyToken, async (req, res) => {
+//     const { friendId } = req.body;
+//     const userId = req.userId;
+//     try {
+//         const db = await connectToDb();  // Get the connected DB
+//         await db.collection('fitUsers').updateOne(
+//             { _id: ObjectId(userId) },
+//             { $pull: { friends: ObjectId(friendId) } }
+//         );
+//         res.json({ success: true });
+//     } catch (error) {
+//         res.status(500).json({ error: 'Error unfollowing user' });
+//     }
+// });
+
+// module.exports = router;
